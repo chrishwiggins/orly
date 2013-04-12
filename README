@@ -1,10 +1,18 @@
+ORLY?
+======
+
 orly? script for introducing people, chris wiggins 2011, 2012, 2013
 
-TL;DR: this is a little set of shell scripts for introducing people
+TL;DR
+---------
+this is a little set of shell scripts for introducing people
 
-HISTORY: i found in 2010-2011 i was making a lot of intros. so i made a shell script. If you ever got an email from me and the time zone was "NYC", you got one of these intros. congrats.
+HISTORY
+--------------
+i found in 2010-2011 i was making a lot of intros. so i made a shell script. If you ever got an email from me and the time zone was "NYC", you got one of these intros. congrats.
 
-VERSIONS:
+VERSIONS
+---------------------
 
 - v1: Thu Jul 7 11:40:41 EST 2011
 - v2: Sun Feb 5 04:59:37 EST 2012 
@@ -12,7 +20,8 @@ VERSIONS:
 - v3: Sat Dec 8 15:16:47 EST 2012 
   (if you ever got an email from me with "User-Agent: SNDMSG", it was this script)
 
-PHILOSOPHY:
+PHILOSOPHY
+---------------------
 
 laziness. try introducing people to each other via, eg., 
 
@@ -20,13 +29,15 @@ laziness. try introducing people to each other via, eg.,
 
 (i called it ii because it's easy to type) and ii will tell you what it lacks and create a shell script called 'orly' that will help you write what you lack. satisfyingly, you do so by typing "orly", like you're IMing with a stroppy collaborator who just won't make the intro. if ii lacks nothing, just send the .eml file produced, or pipe to mutt, if that's the way you roll. (i have scripts for that, natch, but that's a bit dependent on your individual mise-en-place ( https://github.com/chrishwiggins/mise )).
 
-USAGE:
+USAGE
+-----------------
 
 first usage: ii makes directories trash and bios and executables orly and spells (for spellchecking)
 
 see screendump.asc for example usage.
 
-REQUIREMENTS:
+REQUIREMENTS
+---------------------
 
 1) you must have an executable somewhere in path named 'web' which
 launches a web browser. to start i made it a shell script, naturally,
@@ -34,7 +45,8 @@ but you should change.
 
 2) you must have $EDITOR defined.
 
-OUTPUTS:
+OUTPUTS
+-----------------
 - auxdirs:  
   bios:
 ii will make a directory bios/ where you put your biographies.  the syntax admits "+" for newlines (so don't use "+" except as a magic character) and, from writing too much .tex, i chose % as the comment character.
@@ -47,15 +59,24 @@ things get moved to trash with date post-pended in case you are a hoarder (i am)
   edits: edit the bios
 
 - outfile:
-tag1_tag2.eml: a mutt-parseable .eml file. send as you like (i pipe to mutt using mutts.sh)
+tag1\_tag2.eml: a mutt-parseable .eml file. send as you like (i pipe to mutt using mutts.sh)
 
 don't worry about word-wrapping, unix (and thus ii) does that for you.
 
-FINE PRINT:
+FINE PRINT
+----------------
 i strongly urge you to change the 'name' from chris wiggins to your name.
 
-CREDITS:
+CREDITS
+----------------------
 
 i would've never released this if aditya mukerjee <aditya@adityamukerjee.net> hadn't
 - convinced me other people would use it (took 3 min) in mar 2013 and
 - tested on his setups to help make it portable to other machines (took like 3 hours, sorry Aditya, and THANKS)
+
+
+
+LICENSE
+---------
+
+orly is free software distributed under the MIT/X11 license. Details provided in the LICENSE file.
