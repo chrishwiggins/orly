@@ -18,7 +18,7 @@ laziness. try introducing people to each other via, eg.,
 
 % ii smith jones
 
-(i called it ii because it's easy to type) and ii will tell you what it lacks and create a shell script called 'orly' that will help you write what you lack. satisfyingly, you do so by typing "orly", like you're IMing with a stroppy collaborator who just won't make the intro. if ii lacks nothing, just send the .eml file produced, or pipe to mutt, if that's the way you roll. (i have scripts for that, natch, but that's a bit dependent on your individual mise-en-place).
+(i called it ii because it's easy to type) and ii will tell you what it lacks and create a shell script called 'orly' that will help you write what you lack. satisfyingly, you do so by typing "orly", like you're IMing with a stroppy collaborator who just won't make the intro. if ii lacks nothing, just send the .eml file produced, or pipe to mutt, if that's the way you roll. (i have scripts for that, natch, but that's a bit dependent on your individual mise-en-place ( https://github.com/chrishwiggins/mise )).
 
 USAGE:
 
