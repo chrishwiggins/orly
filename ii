@@ -1,0 +1,137 @@
+#! /bin/csh 
+# (c) chris.wiggins@gmail.com
+# intro script 2011-2012-2013
+#
+# revision history
+
+# builtin vars
+setenv dfile nfile.asc  # datafile
+setenv wrap 65          # wordwrap length
+setenv fail 0
+
+# make things that need to exist:
+foreach auxdir ( trash bios )
+  if( ! -e $auxdir ) then 
+    echo "hey! you look new here. imma make you a directory: " $auxdir
+    mkdir $auxdir
+  endif 
+end
+ 
+# move auxfiles to trash
+
+foreach auxfile (orly spells edits)
+  if ( -e $auxfile ) then 
+    mv $auxfile trash/{$auxfile}_`date +%yy%mm%dd_%Hh%Mm%Ss`
+  endif
+  touch $auxfile
+  chmod +x $auxfile
+end
+
+# if nonames, mknames
+if( ! -e $dfile ) then
+  echo "nonames! creating $dfile"
+
+cat >! $dfile << EOF
+first;last;eamil
+bob;smith;bob@smith.com
+jim;smith@work;jim@alsosmith.com
+EOF
+
+endif
+
+# o1 vars
+# # NB: "head 1" prevents errors if you've defined someone twice :/
+setenv str1 `grep -i ';'$1';' $dfile|head -1 | tr '[A-Z]' '[a-z]'`
+setenv str2 `grep -i ';'$2';' $dfile|head -1 | tr '[A-Z]' '[a-z]'`
+setenv f1 `echo $str1 | awk -F\; '{print $1}'`
+setenv f2 `echo $str2 | awk -F\; '{print $1}'`
+setenv l1 `echo $str1 | awk -F\; '{print $2}'`
+setenv l2 `echo $str2 | awk -F\; '{print $2}'`
+setenv e1 `echo $str1 | awk -F\; '{print $3}'`
+setenv e2 `echo $str2 | awk -F\; '{print $3}'`
+
+# if 1st name there in nfile.asc?
+if( $str1 == '') then
+    setenv fail 1
+    echo $1 not found
+    echo "./web http://mail.google.com/mail/u/0/#search/from%3a"$1 >> orly
+endif
+
+# if 2nd name there in nfile.asc?
+if( $str2 == '') then
+    setenv fail 1
+    echo $2 not found
+    echo "./web http://mail.google.com/mail/u/0/#search/from%3a"$2 >> orly
+endif
+
+# if either is missing, you need to edit nfile.asc.
+if ( $fail == 1 ) then
+  echo "vi + $dfile" >> orly
+endif
+
+# o2 vars (fns of o1 vars)
+setenv eml ${l1}_{$l2}.eml
+setenv n1 `echo $l1|cut -d@ -f1`
+setenv n2 `echo $l2|cut -d@ -f1`
+
+if ( $fail == 0 ) then
+
+# BEGIN MAIN
+
+#invariate headers
+cat >! $eml << EOF
+From: chris wiggins
+bcc: cwbook@mydomain.org
+User-Agent: SNDMSG
+Time: `date` (NYC)
+EOF
+
+# recipients
+echo "To:  $f1 $n1 <$e1>, $f2 $n2 <$e2> " >> $eml
+
+#subject
+echo "Subject: intro: "$f1" "$n1" <-> "$f2" "$n2 >> $eml
+
+# NB: done with $n1 $n2
+
+#body
+echo "+@"$f2":++please meet "$f1".+" | tr '+' '\n' >> $eml
+  
+if ( -e bios/{$l1}.txt ) then
+        grep -v '^[ ]*%' < bios/${l1}.txt | tr '\n' ' ' | sed -e 's/ [ ]*/ /g' -e 's/^[ ]*//' | tr '+' '\n' | fold -s  -b -w $wrap >> $eml 
+	echo "" >> $eml
+    else
+        echo "missing bio for $l1 --  please execute:";echo "$EDITOR bios/$l1.txt"
+        echo "$EDITOR bios/$l1.txt" >> orly 
+        setenv fail 1
+endif
+
+echo "+@"$f1":++please meet "$f2".+" | tr '+' '\n' >> $eml
+if ( -e bios/{$l2}.txt ) then
+        grep -v '^[ ]*%' < bios/${l2}.txt | tr '\n' ' ' | sed -e 's/ [ ]*/ /g' -e 's/^[ ]*//' | tr '+' '\n' | fold  -s -b -w $wrap >> $eml 
+	echo "" >> $eml
+    else
+        echo "missing bio for $l2 -- please execute:";echo "$EDITOR bios/$l2.txt"
+        echo "$EDITOR bios/$l2.txt" >> orly 
+        setenv fail 1
+endif
+
+#outtro
+echo "+i hope you can both find time to connect.++best,++chris"| tr '+' '\n' >> $eml
+endif
+
+if ( $fail == 0 ) then
+  more $eml
+
+  touch spells
+  chmod +x spells
+  echo "aspell -c bios/$l2.txt;aspell -c bios/$l1.txt" >> spells
+  
+  touch edits
+  chmod +x edits
+  echo "$EDITOR bios/$l1.txt; $EDITOR bios/$l2.txt" >> edits
+endif 
+
+if ( $fail == 1 ) then
+  rm -f $eml
+endif
