@@ -32,7 +32,7 @@ if( ! -e $dfile ) then
   echo "nonames! creating $dfile"
 
 cat >! $dfile << EOF
-first;last;eamil
+first;last;email
 bob;smith;bob@smith.com
 jim;smith@work;jim@alsosmith.com
 EOF
