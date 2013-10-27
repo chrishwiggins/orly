@@ -45,7 +45,7 @@ Chris
 
 EOF
 
-grep -v -e '^bcc: ' -e '^Time: ' < ${l1}_{$l2}.eml >> $ofile
+grep -v -e '^Time: ' < ${l1}_{$l2}.eml >> $ofile
 
 mkdir proposed
 
