@@ -22,7 +22,6 @@ setenv ofile ${l1}_${l2}-pts.eml
 
 cat >! $ofile << EOF
 From: chris wiggins
-bcc: cwbook@hackNY.org
 User-Agent: SNDMSG
 Time: `date` (NYC)
 To: $e2
