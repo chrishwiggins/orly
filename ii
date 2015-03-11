@@ -9,14 +9,6 @@ setenv dfile nfile.asc  # datafile
 setenv wrap 65          # wordwrap length
 setenv fail 0
 
-# make things that need to exist:
-foreach auxdir ( trash bios )
-  if( ! -e $auxdir ) then 
-    echo "hey! you look new here. imma make you a directory: " $auxdir
-    mkdir $auxdir
-  endif 
-end
- 
 # move auxfiles to trash
 
 foreach auxfile (orly spells edits)

@@ -32,7 +32,7 @@ laziness. try introducing people to each other via, eg.,
 USAGE
 -----------------
 
-first usage: ii makes directories trash and bios and executables orly and spells (for spellchecking)
+first usage: "make" makes directories trash and bios and executables orly and spells (for spellchecking) as well as an example .eml file "smith_smith@work.eml"
 
 see screendump.asc for example usage.
 
