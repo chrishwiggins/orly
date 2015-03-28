@@ -12,8 +12,7 @@ setenv ofile ${l1}_${l2}-pts.eml
 
 # preamble begin
 cat >! $ofile << EOF
-bcc: chris+cwbook@hackNY.org
-User-Agent: SNDMSG
+User-Agent: SNDMSG-orly
 Time: `date` (NYC)
 To: $e2
 Subject: Permission request to intro $f1 $n1 <-> $f2 $n2
