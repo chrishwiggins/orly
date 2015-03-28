@@ -1,35 +1,26 @@
 #!/bin/csh
-# (c) chris.wiggins@gmail.com
-# permission intro script 2013
-#
- 
-ii $1 $2 > /dev/null
+# script to ask for permission to intro people
+# based on "orly" ii script 2011-2015
+# modified mar 2015 to make modular i.e., pti calls ii
 
-# COPY FROM II
-setenv dfile nfile.asc  # datafile
-
-setenv str1 `grep -i ';'$1';' $dfile|tail -1 | tr '[A-Z]' '[a-z]'`
-setenv str2 `grep -i ';'$2';' $dfile|tail -1 | tr '[A-Z]' '[a-z]'`
-setenv f1 `echo $str1 | awk -F\; '{print $1}'`
-setenv f2 `echo $str2 | awk -F\; '{print $1}'`
-setenv l1 `echo $str1 | awk -F\; '{print $2}'`
-setenv l2 `echo $str2 | awk -F\; '{print $2}'`
-setenv e1 `echo $str1 | awk -F\; '{print $3}'`
-setenv e2 `echo $str2 | awk -F\; '{print $3}'`
-# END COPY
-#
+# call ii to make intro email
+ii $1 $2
+# recover variables
+source /tmp/orly-vars.sh
+# define the output file
 setenv ofile ${l1}_${l2}-pts.eml
 
+# preamble begin
 cat >! $ofile << EOF
-From: chris wiggins
+bcc: chris+cwbook@hackNY.org
 User-Agent: SNDMSG
 Time: `date` (NYC)
 To: $e2
-Subject: Permission request to intro $f1 $l1 <-> $f2 $l2
+Subject: Permission request to intro $f1 $n1 <-> $f2 $n2
 
 @${f2}:
 
-I'd like your permission to intro you to $f1 $l1.
+I'd like your permission to intro you to $f1 $n1.
 
 The proposed email I'd send is below. Please
 let me know if this is ok with you. If you'd
@@ -42,13 +33,11 @@ Best,
 Chris
 
 ======
-
 EOF
+# preamble end
 
-grep -v -e '^Time: ' < ${l1}_{$l2}.eml >> $ofile
-
+# wrap it up
 mkdir proposed
-
+cat ${l1}_{$l2}.eml >> $ofile
 mv -f ${l1}_{$l2}.eml proposed
-
 more $ofile
