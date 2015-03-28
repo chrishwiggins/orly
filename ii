@@ -116,7 +116,7 @@ endif
 if ( $fail == 0 ) then
   if ( $verbose == 1 ) then
     more $eml
-  end
+  endif
 
   touch spells
   chmod +x spells
