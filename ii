@@ -118,6 +118,9 @@ if ( $fail == 0 ) then
     more $eml
   endif
 
+  # if all worked, orly views product
+  echo view $eml >> orly
+
   touch spells
   chmod +x spells
   echo "aspell -c bios/$l2.txt;aspell -c bios/$l1.txt" >> spells
