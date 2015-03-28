@@ -134,8 +134,6 @@ endif
 # make a file to source to reset all variables
  
 cat >! /tmp/orly-vars.sh << EOF
-setenv auxdir $auxdir
-setenv auxfile $auxfile
 setenv dfile $dfile
 setenv e1 $e1
 setenv e2 $e2
