@@ -93,8 +93,6 @@ if ( $fail == 0 ) then
 
 #invariate headers
 cat >! $eml << EOF
-From: chris wiggins
-bcc: cwbook@mydomain.org
 User-Agent: SNDMSG
 Time: `date` (NYC)
 EOF
@@ -152,7 +150,7 @@ if ( $fail == 0 ) then
   
   touch edits
   chmod +x edits
-  echo "$EDITOR bios/$l1.txt; $EDITOR bios/$l2.txt; $EDITOR bios/$l1.txt;"  >> edits
+  echo "$EDITOR bios/$l3.txt; $EDITOR bios/$l2.txt; $EDITOR bios/$l1.txt;"  >> edits
 endif 
 
 if ( $fail == 1 ) then
